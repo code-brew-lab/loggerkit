@@ -67,6 +67,15 @@ func New(opts ...OptFunc) (Logger, error) {
 	return &logger{opt}, nil
 }
 
+func (l *logger) SetLogLevel(level string) error {
+	lvl, err := newLogLevel(level)
+	if err != nil {
+		return err
+	}
+	l.level = lvl
+	return nil
+}
+
 func (l *logger) Debug(msg string, v ...interface{}) {
 	if l.level > LevelDebug {
 		return

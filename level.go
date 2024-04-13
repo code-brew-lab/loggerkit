@@ -1,6 +1,9 @@
 package loggerkit
 
-import "errors"
+import (
+	"errors"
+	"strings"
+)
 
 const (
 	LevelDebug LogLevel = iota
@@ -27,6 +30,8 @@ func (ll LogLevel) String() string {
 }
 
 func newLogLevel(level string) (LogLevel, error) {
+	level = strings.ToUpper(level)
+
 	switch level {
 	case "DEBUG":
 		return LevelDebug, nil
