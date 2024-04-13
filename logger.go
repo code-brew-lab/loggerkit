@@ -8,6 +8,8 @@ import (
 
 type (
 	Logger interface {
+		SetLogLevel(level string) error
+		SetWriter(out io.Writer)
 		Info(msg string, v ...interface{})
 		Debug(msg string, v ...interface{})
 		Warning(msg string, v ...interface{})
@@ -74,6 +76,10 @@ func (l *logger) SetLogLevel(level string) error {
 	}
 	l.level = lvl
 	return nil
+}
+
+func (l *logger) SetWriter(out io.Writer) {
+	l.SetOutput(out)
 }
 
 func (l *logger) Debug(msg string, v ...interface{}) {
